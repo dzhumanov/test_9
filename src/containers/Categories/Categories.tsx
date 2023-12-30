@@ -20,7 +20,7 @@ const Categories = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const categoriesLoading = useAppSelector(selectCategoriesLoading);
-  const deleteLoading = useAppSelector(selectCategoriesDelete)
+  const deleteLoading = useAppSelector(selectCategoriesDelete);
   const showModal = useAppSelector(selectCategoriesModal);
 
   useEffect(() => {
@@ -36,6 +36,16 @@ const Categories = () => {
     await dispatch(fetchCategories());
   };
 
+  const sortedCategories = [...categories].sort((a, b) => {
+    if (a.type === "income" && b.type === "expense") {
+      return -1;
+    } else if (a.type === "expense" && b.type === "income") {
+      return 1;
+    } else {
+      return a.name.localeCompare(b.name);
+    }
+  });
+
   return (
     <>
       <div className="d-flex justify-content-between mt-3">
@@ -44,11 +54,11 @@ const Categories = () => {
           Add new category
         </button>
       </div>
-      <div>
+      <div className="mt-3">
         {categoriesLoading ? (
           <Spinner />
         ) : (
-          categories.map((category) => (
+          sortedCategories.map((category) => (
             <OneCategory
               key={category.id}
               category={category}

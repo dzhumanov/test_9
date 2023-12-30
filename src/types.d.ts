@@ -1,8 +1,9 @@
 export interface Transaction {
   id: string;
   category: string;
-  amount: number;
+  amount: string;
   date: string;
+  type: string;
 }
 
 export type ApiTrans = Omit<Transaction, "id">;
@@ -28,4 +29,4 @@ export type FormTrans = {
   amount: number;
   date: string;
   type?: string;
-}
+};

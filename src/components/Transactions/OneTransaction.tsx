@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Category, Transaction } from "../../types";
 import axiosApi from "../../axiosApi";
 import ButtonSpinner from "../Spinner/ButtonSpinner";
+import dayjs from "dayjs";
 
 interface Props {
   transaction: Transaction;
@@ -31,21 +32,39 @@ const OneTransaction: React.FC<Props> = ({
     fetchCategory();
   }, [transaction.category]);
 
+  let color;
+  if (category && category.type === "income") {
+    color = "text-success";
+  } else if (category && category.type === "expense") {
+    color = "text-danger";
+  }
+
   return (
     <>
       {category ? (
-        <div className="d-flex align-items-center">
-          <h4>{category.name}</h4>
-          <p className="m-0 ms-3">
+        <div className="d-flex align-items-center mb-2">
+          <h4 className="m-0 ">{category.name}</h4>
+          <p className={`m-0 ms-3 fs-4 ${color}`}>
             {category.type === "income" ? (
-              <strong>+</strong>
+              <img
+                src="https://freesvg.org/img/primary-tab-new.png"
+                alt=""
+                style={{ width: "30px" }}
+              />
             ) : category.type === "expense" ? (
-              <strong>-</strong>
+              <img
+                src="https://www.pngall.com/wp-content/uploads/5/Red-Minus-PNG-File.png"
+                alt=""
+                style={{ width: "30px" }}
+              />
             ) : null}
             {transaction.amount} KGS
           </p>
-          <p className="m-0 ms-3">Date: {transaction.date}</p>
-          <div className="btn-wrapper d-flex gap-3 ms-auto">
+          <p className="m-0 ms-auto">
+            Date:{" "}
+            <span>{dayjs(transaction.date).format("DD.MM.YYYY HH:mm:ss")}</span>
+          </p>
+          <div className="btn-wrapper d-flex gap-3 ms-3">
             <button className="btn btn-success" onClick={onDelete}>
               Edit
             </button>
