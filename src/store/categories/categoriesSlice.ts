@@ -7,12 +7,14 @@ interface CategoriesState {
   categories: Category[];
   categoriesLoading: boolean;
   categoriesModalStatus: boolean;
+  categoriesDelete: false | string;
 }
 
 const initialState: CategoriesState = {
   categories: [],
   categoriesLoading: false,
   categoriesModalStatus: false,
+  categoriesDelete: false,
 };
 
 const categoriesSlice = createSlice({
@@ -46,3 +48,5 @@ export const selectCategoriesLoading = (state: RootState) =>
   state.categories.categoriesLoading;
 export const selectCategoriesModal = (state: RootState) =>
   state.categories.categoriesModalStatus;
+  export const selectCategoriesDelete = (state: RootState) =>
+  state.categories.categoriesDelete;

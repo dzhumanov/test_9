@@ -77,6 +77,7 @@ const Form: React.FC<Props> = ({
           className="form-control"
           onChange={changeTrans}
         >
+            <option value="">Select type</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>

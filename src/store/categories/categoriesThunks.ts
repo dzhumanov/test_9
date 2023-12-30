@@ -33,3 +33,10 @@ export const createCategory = createAsyncThunk<void, ApiCategory>(
     await axiosApi.post("/categories.json", category);
   }
 );
+
+export const deleteCategory = createAsyncThunk<void, string>(
+  "categories/delete",
+  async (categoryId) => {
+    await axiosApi.delete(`/categories/${categoryId}.json`);
+  }
+);

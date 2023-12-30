@@ -2,11 +2,15 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/Hooks";
 import {
   selectCategories,
+  selectCategoriesDelete,
   selectCategoriesLoading,
   selectCategoriesModal,
   toggleCategoriesModal,
 } from "../../store/categories/categoriesSlice";
-import { fetchCategories } from "../../store/categories/categoriesThunks";
+import {
+  deleteCategory,
+  fetchCategories,
+} from "../../store/categories/categoriesThunks";
 import Spinner from "../../components/Spinner/Spinner";
 import OneCategory from "./OneCategory";
 import Modal from "../../components/Modal/Modal";
@@ -16,6 +20,7 @@ const Categories = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const categoriesLoading = useAppSelector(selectCategoriesLoading);
+  const deleteLoading = useAppSelector(selectCategoriesDelete)
   const showModal = useAppSelector(selectCategoriesModal);
 
   useEffect(() => {
@@ -24,6 +29,11 @@ const Categories = () => {
 
   const onClick = () => {
     dispatch(toggleCategoriesModal());
+  };
+
+  const removeCategory = async (id: string) => {
+    await dispatch(deleteCategory(id));
+    await dispatch(fetchCategories());
   };
 
   return (
@@ -39,7 +49,12 @@ const Categories = () => {
           <Spinner />
         ) : (
           categories.map((category) => (
-            <OneCategory key={category.id} category={category} />
+            <OneCategory
+              key={category.id}
+              category={category}
+              onDelete={() => removeCategory(category.id)}
+              deleteLoading={deleteLoading}
+            />
           ))
         )}
       </div>
@@ -53,4 +68,3 @@ const Categories = () => {
 };
 
 export default Categories;
-

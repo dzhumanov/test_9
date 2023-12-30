@@ -36,7 +36,7 @@ const OneTransaction: React.FC<Props> = ({
       {category ? (
         <div className="d-flex align-items-center">
           <h4>{category.name}</h4>
-          <p>
+          <p className="m-0 ms-3">
             {category.type === "income" ? (
               <strong>+</strong>
             ) : category.type === "expense" ? (
@@ -44,7 +44,7 @@ const OneTransaction: React.FC<Props> = ({
             ) : null}
             {transaction.amount} KGS
           </p>
-          <p>Date: {transaction.date}</p>
+          <p className="m-0 ms-3">Date: {transaction.date}</p>
           <div className="btn-wrapper d-flex gap-3 ms-auto">
             <button className="btn btn-success" onClick={onDelete}>
               Edit
