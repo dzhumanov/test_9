@@ -59,11 +59,11 @@ const CategoryForm: React.FC<Props> = ({
           <label htmlFor="type">Type</label>
           <select
             name="type"
-            id="name"
+            id="type"
             className="form-control"
             onChange={changeCategory}
           >
-            <option value="">Select type    </option>
+            <option value="">Select type </option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>

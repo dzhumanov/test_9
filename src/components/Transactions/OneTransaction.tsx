@@ -42,9 +42,11 @@ const OneTransaction: React.FC<Props> = ({
   return (
     <>
       {category ? (
-        <div className="d-flex align-items-center mb-2">
-          <h4 className="m-0 ">{category.name}</h4>
-          <p className={`m-0 ms-3 fs-4 ${color}`}>
+        <div className="row mb-2">
+          <div className="col-2">
+            <h4 className="m-0">{category.name}</h4>
+          </div>
+          <div className={`m-0 fs-4 col-3 ${color}`}>
             {category.type === "income" ? (
               <img
                 src="https://freesvg.org/img/primary-tab-new.png"
@@ -59,12 +61,11 @@ const OneTransaction: React.FC<Props> = ({
               />
             ) : null}
             {transaction.amount} KGS
-          </p>
-          <p className="m-0 ms-auto">
-            Date:{" "}
-            <span>{dayjs(transaction.date).format("DD.MM.YYYY HH:mm:ss")}</span>
-          </p>
-          <div className="btn-wrapper d-flex gap-3 ms-3">
+          </div>
+          <div className="m-0 col-4">
+            Date: {dayjs(transaction.date).format("DD.MM.YYYY HH:mm:ss")}
+          </div>
+          <div className="btn-wrapper col-3 d-flex gap-3">
             <button className="btn btn-success" onClick={onDelete}>
               Edit
             </button>

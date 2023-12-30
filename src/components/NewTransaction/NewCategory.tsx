@@ -1,8 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/Hooks";
-import {
-  createLoading,
-} from "../../store/transactions/transactionsSlice";
+import { createLoading } from "../../store/transactions/transactionsSlice";
 import {
   createCategory,
   fetchCategories,

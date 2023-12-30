@@ -26,7 +26,7 @@ export interface CategoriesList {
 
 export type FormTrans = {
   category: string;
-  amount: number;
+  amount: string;
   date: string;
-  type?: string;
+  type: string;
 };
