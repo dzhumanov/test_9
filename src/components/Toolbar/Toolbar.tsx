@@ -1,7 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../app/Hooks";
+import { toggleModal } from "../../store/transactions/transactionsSlice";
 
 const Toolbar: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const onClick = () => {
+    dispatch(toggleModal());
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid w-50">
@@ -15,9 +22,7 @@ const Toolbar: React.FC = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/add" className="nav-link">
-              Add
-            </NavLink>
+            <button className="nav-link" onClick={onClick}>Add</button>
           </li>
         </ul>
       </div>

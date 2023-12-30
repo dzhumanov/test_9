@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Transaction, TransactionsList } from "../../types";
+import { ApiTrans, Transaction, TransactionsList } from "../../types";
 import { AppDispatch } from "../../app/store";
 import axiosApi from "../../axiosApi";
 
@@ -28,3 +28,10 @@ export const fetchTransactions = createAsyncThunk<
 
   return newTransactions;
 });
+
+export const createTransaction = createAsyncThunk<void, ApiTrans>(
+  "transactions/create",
+  async (dish) => {
+    await axiosApi.post("/transactions.json", dish);
+  }
+);

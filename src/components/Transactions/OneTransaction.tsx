@@ -24,23 +24,24 @@ const OneTransaction: React.FC<Props> = ({ transaction }) => {
     fetchCategory();
   }, [transaction.category]);
 
-  if (!category) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
-      <h1>{category.name}</h1>
-      <p>
-        {category.type === "income" ? (
-          <strong>+</strong>
-        ) : category.type === "expense" ? (
-          <strong>-</strong>
-        ) : null}
-        {transaction.amount} KGS
-      </p>
-
-      <p>Date: {transaction.date}</p>
+      {category ? (
+        <div>
+          <h1>{category.name}</h1>
+          <p>
+            {category.type === "income" ? (
+              <strong>+</strong>
+            ) : category.type === "expense" ? (
+              <strong>-</strong>
+            ) : null}
+            {transaction.amount} KGS
+          </p>
+          <p>Date: {transaction.date}</p>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

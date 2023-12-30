@@ -2,7 +2,7 @@ export interface Transaction {
   id: string;
   category: string;
   amount: number;
-  date: number;
+  date: string;
 }
 
 export type ApiTrans = Omit<Transaction, "id">;
@@ -22,3 +22,4 @@ export type ApiCategory = Omit<Category, "id">;
 export interface CategoriesList {
   [id: string]: ApiCategory;
 }
+
