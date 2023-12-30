@@ -96,6 +96,3 @@ const CategoryForm: React.FC<Props> = ({
 };
 
 export default CategoryForm;
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}

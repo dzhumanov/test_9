@@ -53,6 +53,4 @@ const Categories = () => {
 };
 
 export default Categories;
-function toggleCategoryModal(): any {
-  throw new Error("Function not implemented.");
-}
+

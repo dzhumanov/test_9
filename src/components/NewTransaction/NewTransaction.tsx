@@ -1,5 +1,4 @@
 import React from "react";
-import {useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/Hooks";
 import { createLoading, toggleModal } from "../../store/transactions/transactionsSlice";
 import { ApiTrans } from "../../types";

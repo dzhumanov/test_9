@@ -8,6 +8,7 @@ interface TransactionsState {
   fetchLoading: boolean;
   modalStatus: boolean;
   createLoading: boolean;
+  deleteLoading: false | string;
 }
 
 const initialState: TransactionsState = {
@@ -15,6 +16,7 @@ const initialState: TransactionsState = {
   fetchLoading: false,
   modalStatus: false,
   createLoading: false,
+  deleteLoading: false,
 };
 
 const transactionsSlice = createSlice({
@@ -52,3 +54,5 @@ export const selectTransactionsLoading = (state: RootState) =>
 export const selectModal = (state: RootState) => state.transactions.modalStatus;
 export const createLoading = (state: RootState) =>
   state.transactions.createLoading;
+export const selectDeleteLoading = (state: RootState) =>
+  state.transactions.deleteLoading;

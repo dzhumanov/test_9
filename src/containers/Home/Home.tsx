@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../app/Hooks";
+import { useAppSelector } from "../../app/Hooks";
 import Modal from "../../components/Modal/Modal";
 import NewTransaction from "../../components/NewTransaction/NewTransaction";
 import Transactions from "../../components/Transactions/Transactions";
