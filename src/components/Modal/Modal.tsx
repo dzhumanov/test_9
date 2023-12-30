@@ -4,21 +4,19 @@ import Backdrop from "../Backdrop/Backdrop";
 interface Props extends React.PropsWithChildren {
   show: boolean;
   title: string;
-  onClose: React.MouseEventHandler;
 }
 
-const Modal: React.FC<Props> = ({ show, title, onClose, children }) => {
+const Modal: React.FC<Props> = ({ show, title, children }) => {
   const onInnerClick = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
 
   return (
     <>
-      <Backdrop show={show} onClick={onClose} />
+      <Backdrop show={show} />
       <div
         className="modal show"
         style={{ display: show ? "block" : "none" }}
-        onClick={onClose}
       >
         <div className="modal-dialog" onClick={onInnerClick}>
           <div className="modal-content">

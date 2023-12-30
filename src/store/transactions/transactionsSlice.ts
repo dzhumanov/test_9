@@ -50,4 +50,5 @@ export const selectTransactions = (state: RootState) =>
 export const selectTransactionsLoading = (state: RootState) =>
   state.transactions.fetchLoading;
 export const selectModal = (state: RootState) => state.transactions.modalStatus;
-export const createLoading = (state: RootState) => state.transactions.createLoading;
+export const createLoading = (state: RootState) =>
+  state.transactions.createLoading;

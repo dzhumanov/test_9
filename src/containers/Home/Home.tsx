@@ -4,21 +4,16 @@ import NewTransaction from "../../components/NewTransaction/NewTransaction";
 import Transactions from "../../components/Transactions/Transactions";
 import {
   selectModal,
-  toggleModal,
 } from "../../store/transactions/transactionsSlice";
 
 const Home = () => {
-  const dispatch = useAppDispatch();
   const showModal = useAppSelector(selectModal);
-  const onClick = () => {
-    dispatch(toggleModal());
-  };
   return (
     <div>
       <Transactions />
-      <Modal show={showModal} title="Add new transaction" onClose={onClick}>
+      <Modal show={showModal} title="Add new transaction">
         <div className="modal-body">
-            <NewTransaction/>
+          <NewTransaction />
         </div>
       </Modal>
     </div>

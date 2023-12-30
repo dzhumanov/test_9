@@ -23,3 +23,9 @@ export interface CategoriesList {
   [id: string]: ApiCategory;
 }
 
+export type FormTrans = {
+  category: string;
+  amount: number;
+  date: string;
+  type?: string;
+}

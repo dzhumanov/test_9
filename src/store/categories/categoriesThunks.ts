@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {CategoriesList, Category } from "../../types";
+import {ApiCategory, CategoriesList, Category } from "../../types";
 import axiosApi from "../../axiosApi";
 import { AppDispatch } from "../../app/store";
 
@@ -27,18 +27,9 @@ export const fetchCategories = createAsyncThunk<
   return newCategories;
 });
 
-// export const fetchOneCategory = createAsyncThunk<ApiCategory, string>(
-//   "categories/fetchOne",
-//   async (id) => {
-//     const response = await axiosApi.get<ApiCategory | null>(
-//       "/categories/" + id + ".json"
-//     );
-//     const category = response.data;
-
-//     if (category === null) {
-//       throw new Error("404! Not found!");
-//     }
-
-//     return category;
-//   }
-// );
+export const createCategory = createAsyncThunk<void, ApiCategory>(
+  "categories/create",
+  async (category) => {
+    await axiosApi.post("/categories.json", category);
+  }
+);

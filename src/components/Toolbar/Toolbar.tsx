@@ -21,9 +21,6 @@ const Toolbar: React.FC = () => {
               Categories
             </NavLink>
           </li>
-          <li className="nav-item">
-            <button className="nav-link" onClick={onClick}>Add</button>
-          </li>
         </ul>
       </div>
     </nav>

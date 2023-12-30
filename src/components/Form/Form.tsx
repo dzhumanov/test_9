@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonSpinner from "../Spinner/ButtonSpinner";
-import { ApiTrans } from "../../types";
+import { ApiTrans, FormTrans } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../app/Hooks";
+import { selectCategories } from "../../store/categories/categoriesSlice";
+import { fetchCategories } from "../../store/categories/categoriesThunks";
+import { toggleModal } from "../../store/transactions/transactionsSlice";
 
-const initialState: ApiTrans = {
-  category: '',
+const initialState: FormTrans = {
+  category: "",
   amount: 0,
-  date: '',
+  date: "",
+  type: "",
 };
 
 interface Props {
@@ -21,7 +26,13 @@ const Form: React.FC<Props> = ({
   isEdit = false,
   isLoading = false,
 }) => {
-  const [trans, setTrans] = useState<ApiTrans>(existingTrans);
+  const [trans, setTrans] = useState<FormTrans>(existingTrans);
+  const categories = useAppSelector(selectCategories);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(fetchCategories());
+  }, [dispatch]);
 
   const changeTrans = (
     e: React.ChangeEvent<
@@ -42,7 +53,7 @@ const Form: React.FC<Props> = ({
     }
 
     const now = new Date();
-    const createdAt= now.toISOString();
+    const createdAt = now.toISOString();
 
     onSubmit({
       ...trans,
@@ -50,20 +61,42 @@ const Form: React.FC<Props> = ({
     });
   };
 
+  const closeModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    dispatch(toggleModal());
+  };
+
   return (
     <form onSubmit={onFormSubmit}>
       <h4>{isEdit ? "Edit transaction" : "Add new transaction"}</h4>
       <div className="form-group">
         <label htmlFor="type">Type</label>
-        <select name="type" id="name" className="form-control" onChange={changeTrans}>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
+        <select
+          name="type"
+          id="name"
+          className="form-control"
+          onChange={changeTrans}
+        >
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
         </select>
       </div>
       <div className="form-group">
         <label htmlFor="category">Category</label>
-        <select name="category" id="category" className="form-control" onChange={changeTrans}>
-            {}
+        <select
+          name="category"
+          id="category"
+          className="form-control"
+          onChange={changeTrans}
+        >
+          <option value="">Select category</option>
+          {categories
+            .filter((category) => category.type === trans.type)
+            .map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
         </select>
       </div>
       <div className="form-group">
@@ -85,6 +118,9 @@ const Form: React.FC<Props> = ({
       >
         {isLoading && <ButtonSpinner />}
         {isEdit ? "Edit" : "Create"}
+      </button>
+      <button className="btn btn-danger mt-2 ms-2" onClick={closeModal}>
+        Cancel
       </button>
     </form>
   );
